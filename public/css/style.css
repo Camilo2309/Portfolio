@@ -5,6 +5,7 @@ a, .sec-contact .btn {
 /*=Typography=*/
 html {
     font-size: 16px;
+    scroll-behavior: smooth;
 }
 
 body {

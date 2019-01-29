@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,24 +15,21 @@ class EditHomeController extends AbstractController
     /**
      * @Route("/edit/home", name="edit_home")
      */
-    public function editHome(Request $request, User $user): Response
+    public function editHome(Request $request)
     {
 //        modification du user
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        $formUser = $this->createForm(UserType::class);
+        $formUser->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formUser->isSubmitted() && $formUser->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('edit_home', [
-                'id' => $user->getId(),
-            ]);
+            return $this->redirectToRoute('home');
         }
 //        fin de modification du user
 
         return $this->render('editHome/index.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
+            'formUser' => $formUser->createView(),
         ]);
     }
 

@@ -69,38 +69,6 @@ class HomeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/edit/home", name="edit_home")
-     */
-    public function editHome(Request $request, User $user): Response
-    {
-//        modification du user
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('edit_home', [
-                'id' => $user->getId(),
-            ]);
-        }
-//        fin de modification du user
-
-        return $this->render('editHome/index.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/bobby", name="bobby")
-     * @return Response
-     */
-    public function ntp()
-    {
-        return new Response("Nique ta mere");
-    }
 
 
 }
