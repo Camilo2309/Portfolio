@@ -69,10 +69,6 @@ class User implements UserInterface
      */
     private $experiences;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Role", mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $role;
 
     public function __construct()
     {
@@ -231,23 +227,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRole(): ?Role
-    {
-        return $this->role;
-    }
 
-    public function setRole(?Role $role): self
-    {
-        $this->role = $role;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newUser = $role === null ? null : $this;
-        if ($newUser !== $role->getUser()) {
-            $role->setUser($newUser);
-        }
-
-        return $this;
-    }
 
     public function getRoles(){
 

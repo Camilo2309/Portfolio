@@ -6,8 +6,11 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Entity\User;
 use App\Form\ContactType;
+use App\Form\UserType;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
+use App\Services\EditHomeService;
+use Doctrine\ORM\EntityManager;
 use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,13 +62,14 @@ class HomeController extends AbstractController
 
             }
 
-        }
+        };
 
 
         return $this->render('home/index.html.twig', [
             'user' => $user,
             'projects' => $projects,
             'form' => $form->createView(),
+
         ]);
     }
 

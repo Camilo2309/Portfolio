@@ -71,7 +71,7 @@
             <div class="container">
                 <h2>À PROPOS DE MOI ...</h2>
                 {% if app.user %}
-                    <h4><a href="#"><i class="fas fa-edit" style="display: inline"></i></a></h4>
+                    {% include 'part/_modalAboutUs.html.twig' %}
                 {% endif %}
                 <hr />
                     <div class="w3-col m6 w3-center w3-section">

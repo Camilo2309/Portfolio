@@ -1,0 +1,48 @@
+{% form_theme formAboutUs 'bootstrap_4_layout.html.twig' %}
+
+<button type="button"  data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><i class="fas fa-edit"></i></button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modifier mes infos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    {{ form_start(formAboutUs) }}
+
+                    {{ form_label(formAboutUs.email) }}
+                    {{ form_widget(formAboutUs.email) }}
+
+                    {{ form_label(formAboutUs.picture) }}
+                    {{ form_widget(formAboutUs.picture) }}
+
+                    {{ form_label(formAboutUs.firstName) }}
+                    {{ form_widget(formAboutUs.firstName) }}
+
+                    {{ form_label(formAboutUs.lastName) }}
+                    {{ form_widget(formAboutUs.lastName) }}
+
+                    {{ form_label(formAboutUs.titlePresentation) }}
+                    {{ form_widget(formAboutUs.titlePresentation) }}
+
+                    {{ form_label(formAboutUs.presentation) }}
+                    {{ form_widget(formAboutUs.presentation) }}
+
+
+                    {{ form_end(formAboutUs) }}
+                </form>
+            </div>
+            <div class="modal-footer">
+                {#<a href="{{ path('editAboutUs') }}">#}
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary"><a href="{{ path('editAboutUs', {id : user.id} ) }}">Enregistrer</a></button>
+            </div>
+        </div>
+    </div>
+</div>
