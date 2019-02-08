@@ -123,7 +123,6 @@ class AdminController extends AbstractController
 
         if ($request =! null && $request->isMethod('post')) {
 
-
             $uploadDir = 'uploads/';
             $filename = $_FILES['picture']['name'];
             if (!empty($filename)) {
@@ -152,5 +151,4 @@ class AdminController extends AbstractController
         }
             return $this->redirectToRoute('admin');
     }
-
 }
