@@ -117,6 +117,8 @@ class KnowledgeController extends AbstractController
             $knowledge->setRating($rating);
 
             $em->flush();
+
+            $this->addFlash('success', 'Tu as bien modifié ta connaissance !');
         }
         return $this->redirectToRoute('admin');
     }
