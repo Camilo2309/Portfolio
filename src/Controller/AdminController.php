@@ -18,6 +18,7 @@ use App\Repository\UserRepository;
 use App\Services\uploadManager;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -65,8 +66,7 @@ class AdminController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function editProfil(Request $request, UserInterface $user, uploadManager $uploadManager,
-                               UserRepository $userRepository, EntityManagerInterface $em)
+    public function editProfil(Request $request, UserRepository $userRepository, EntityManagerInterface $em)
     {
 
         $user = $userRepository->findUser('bolanos.camilo2309@gmail.com');
@@ -152,20 +152,28 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin');
     }
 
+
+    /**
+     * @Route("/edit/knowledge/{id}", name="editKnowledge")
+     */
+
+    public function editKnowledge(Knowledge $knowledge, Request $request, KnowledgeRepository $knowledgeRepository)
+    {
+
+    }
+
     /**
      * @Route("/delete/knowledge/{id}", name="deleteKnowledge")
-     * @param Knowledge $knowledge
-     * @param UserRepository $userRepository
+     * @param Knowledge $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteKnowledge(Knowledge $knowledge, UserRepository $userRepository) {
+    public function deleteKnowledge(Knowledge $id) {
 
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->getUser();
+        $knowledge = $em->getRepository(Knowledge::class)->find($id);
 
-        $user->removeKnowledge($knowledge);
-
+        $em->remove($knowledge);
         $em->flush();
 
         return $this->redirectToRoute('admin');
