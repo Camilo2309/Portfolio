@@ -60,8 +60,6 @@ class AdminController extends AbstractController
     /**
      * @Route("/update/profil", name="editProfil", methods={"POST"})
      * @param Request $request
-     * @param UserInterface $user
-     * @param uploadManager $uploadManager
      * @param UserRepository $userRepository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Doctrine\ORM\NonUniqueResultException
@@ -103,80 +101,4 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin');
     }
 
-    /**
-     * @Route("/add/knowledge", name="addKnowledge")
-     * @param UserInterface $user
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     */
-
-    public function addKnowledge(UserInterface $user, Request $request)
-    {
-
-        $user = $this->getUser();
-
-        $knowledge = new Knowledge();
-
-        $name = $request->request->get('name');
-        $description = $request->request->get('description');
-        $rating = $request->request->get('rating');
-
-        if ($request =! null && $request->isMethod('post')) {
-
-            $uploadDir = 'uploads/';
-            $filename = $_FILES['picture']['name'];
-            if (!empty($filename)) {
-
-                $extension = pathinfo($filename, PATHINFO_EXTENSION);
-                $filename = md5(uniqid()) . '.' . $extension;
-                $uploadFile = $uploadDir . basename($filename);
-                move_uploaded_file($_FILES['picture']['tmp_name'], $uploadFile);
-
-                $knowledge->setPicture($filename);
-                $knowledge->setDescription($description);
-                $knowledge->setName($name);
-                $knowledge->setRating($rating);
-                $knowledge->setUser($user);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($knowledge);
-
-                $em->flush();
-
-                $this->addFlash('success', 'Tu as bien ajouté ta connaissance !');
-                if (empty($filename)){
-                    $this->addFlash('danger', 'Il manque la photo !');
-                }
-            }
-        }
-            return $this->redirectToRoute('admin');
-    }
-
-
-    /**
-     * @Route("/edit/knowledge/{id}", name="editKnowledge")
-     */
-
-    public function editKnowledge(Knowledge $knowledge, Request $request, KnowledgeRepository $knowledgeRepository)
-    {
-
-    }
-
-    /**
-     * @Route("/delete/knowledge/{id}", name="deleteKnowledge")
-     * @param Knowledge $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function deleteKnowledge(Knowledge $id) {
-
-        $em = $this->getDoctrine()->getManager();
-
-        $knowledge = $em->getRepository(Knowledge::class)->find($id);
-
-        $em->remove($knowledge);
-        $em->flush();
-
-        return $this->redirectToRoute('admin');
-
-    }
 }

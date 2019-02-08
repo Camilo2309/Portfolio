@@ -95,8 +95,6 @@
         <section id="services" class="sec-about">
             <div class="container">
 
-
-
                 <h2>CONNAISSANCES</h2>
                 {% if app.user %}
                     {% include 'part/_modalAddKnowledge.html.twig' %}
@@ -116,8 +114,8 @@
                                 {% include 'part/_rating.html.twig'  with {'rating': knowledge.rating}%}
                                 <p>{{ knowledge.description }}</p>
                                 {% if app.user %}
-                                    <a href="#"><i class="fas fa-edit" style="display: inline"></i></a>
-                                    <a href="{{ path('deleteKnowledge', {id : knowledge.id }) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ knowledge.name }} ?')"><i class="fas fa-trash-alt"></i></a>
+                                    {% include 'part/_modalEditKnowledge.html.twig' %}
+                                    <a href="{{ path('deleteKnowledge', {id : knowledge.id }) }}"  onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ knowledge.name }} ?')"><i class="fas fa-trash-alt" style="display: inline" ></i></a>
                                 {% endif %}
                             </div>
                         {% endif %}
