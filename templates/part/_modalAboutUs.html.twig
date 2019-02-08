@@ -1,6 +1,9 @@
-{% form_theme formAboutUs 'bootstrap_4_layout.html.twig' %}
 
-<button type="button"  data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><i class="fas fa-edit"></i></button>
+{#<button type="button"  data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><i class="fas fa-edit"></i></button>#}
+
+<div class="bs-example">
+    <a href="#exampleModal" data-toggle="modal"><i class="fas fa-edit"></i></a>
+</div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -12,36 +15,43 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
 
-                    {{ form_start(formAboutUs) }}
-
-                    {{ form_label(formAboutUs.email) }}
-                    {{ form_widget(formAboutUs.email) }}
-
-                    {{ form_label(formAboutUs.picture) }}
-                    {{ form_widget(formAboutUs.picture) }}
-
-                    {{ form_label(formAboutUs.firstName) }}
-                    {{ form_widget(formAboutUs.firstName) }}
-
-                    {{ form_label(formAboutUs.lastName) }}
-                    {{ form_widget(formAboutUs.lastName) }}
-
-                    {{ form_label(formAboutUs.titlePresentation) }}
-                    {{ form_widget(formAboutUs.titlePresentation) }}
-
-                    {{ form_label(formAboutUs.presentation) }}
-                    {{ form_widget(formAboutUs.presentation) }}
+                <form action="{{ path('editProfil') }}" method="post" enctype="multipart/form-data">
+                    <div style="margin: 0 30px">
+                        <div class="form-group">
+                            <label for="lastName">Nom</label>
+                            <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Nom..." value="{{ user.lastName }}">
+                        </div>
 
 
-                    {{ form_end(formAboutUs) }}
+                        <div class="form-group">
+                            <label for="firstName">Prénom</label>
+                            <input type="text" name="firstName" id="firstName" class="form-control" placeholder="Prénom..." value="{{ user.firstName }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="picture">Photo</label>
+                            <input type="file" name="picture" id="picture" class="form-control" placeholder="image..." value="{{ user.picture }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="titlePresentation">Titre</label>
+                            <input type="text" name="titlePresentation" id="titlePresentation" class="form-control" placeholder="Titre..." value="{{ user.titlePresentation }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="presentation">Présentation</label>
+                            <textarea name="presentation" id="presentation" class="form-control" placeholder="Présentation..." >{{ user.presentation }}</textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        {#<a href="{{ path('editAboutUs') }}">#}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button class="btn btn-theme btn-small" type="submit">Modifier</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                {#<a href="{{ path('editAboutUs') }}">#}
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary"><a href="{{ path('editAboutUs', {id : user.id} ) }}">Enregistrer</a></button>
+
             </div>
         </div>
     </div>
