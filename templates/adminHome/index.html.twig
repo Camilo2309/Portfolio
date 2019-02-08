@@ -108,6 +108,9 @@
                 <div class="row">
                     {% for knowledge in user.knowledge %}
                         {% if knowledge.rating|length > 0 %}
+                            {% if knowledge is null %}
+                                <p>Tu n'as pas encore de connaissances petit cancre!</p>
+                                {% endif %}
                             <div class="col-sm-4 symbol">
                                 <h2 class="h3">{{ knowledge.name }}</h2>
                                 <div class="w3-col">
@@ -117,7 +120,7 @@
                                 <p>{{ knowledge.description }}</p>
                                 {% if app.user %}
                                     <a href="#"><i class="fas fa-edit" style="display: inline"></i></a>
-                                    <a href="#"><i class="fas fa-trash-alt" style="display: inline"></i></a>
+                                    {% include 'part/_modalDeleteKnowledge.html.twig' %}
                                 {% endif %}
                             </div>
                         {% endif %}

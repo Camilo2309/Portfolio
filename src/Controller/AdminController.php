@@ -151,4 +151,24 @@ class AdminController extends AbstractController
         }
             return $this->redirectToRoute('admin');
     }
+
+    /**
+     * @Route("/delete/knowledge/{id}", name="deleteKnowledge")
+     * @param Knowledge $knowledge
+     * @param UserRepository $userRepository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteKnowledge(Knowledge $knowledge, UserRepository $userRepository) {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->getUser();
+
+        $user->removeKnowledge($knowledge);
+
+        $em->flush();
+
+        return $this->redirectToRoute('admin');
+
+    }
 }

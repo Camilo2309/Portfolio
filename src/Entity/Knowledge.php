@@ -44,8 +44,8 @@ class Knowledge
     private $rating;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="knowledge", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="knowledge")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 
