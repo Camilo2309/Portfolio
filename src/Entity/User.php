@@ -60,7 +60,7 @@ class User implements UserInterface
     private $presentation;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Knowledge", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Knowledge", mappedBy="user", cascade={"persist"})
      */
     private $knowledge;
 

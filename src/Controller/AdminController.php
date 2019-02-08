@@ -9,7 +9,10 @@
 namespace App\Controller;
 
 
+use App\Entity\Knowledge;
+use App\Form\KnowledgeType;
 use App\Form\UserType;
+use App\Repository\KnowledgeRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
 use App\Services\uploadManager;
@@ -20,34 +23,34 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
 
 /**
  * @Route("admin")
  */
-class UserController extends AbstractController
+class AdminController extends AbstractController
 {
     /**
      * @Route("/", name="admin" )
-     * @param Request $request
-     * @param ObjectManager $manager
      * @param UserRepository $userRepository
      * @param ProjectRepository $projectRepository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function adminCrud(Request $request, ObjectManager $manager,
-                                UserRepository $userRepository, ProjectRepository $projectRepository)
+    public function admin(UserRepository $userRepository, ProjectRepository $projectRepository, KnowledgeRepository $knowledgeRepository)
     {
 
         $user = $userRepository->findUser('bolanos.camilo2309@gmail.com');
         $projects = $projectRepository->findAll();
 
+        $knowledge = $knowledgeRepository->findAll();
 
 
         return $this->render('adminHome/index.html.twig', [
             'user' => $user,
             'projects' => $projects,
+            'knowledge' => $knowledge,
 
         ]);
     }
@@ -88,7 +91,6 @@ class UserController extends AbstractController
 
             $user->setPicture($filename);
 
-
         }
 
         $user->setLastName($lastName);
@@ -99,6 +101,56 @@ class UserController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('admin');
+    }
+
+    /**
+     * @Route("/add/knowledge", name="addKnowledge")
+     * @param UserInterface $user
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+
+    public function addKnowledge(UserInterface $user, Request $request)
+    {
+
+        $user = $this->getUser();
+
+        $knowledge = new Knowledge();
+
+        $name = $request->request->get('name');
+        $description = $request->request->get('description');
+        $rating = $request->request->get('rating');
+
+        if ($request =! null && $request->isMethod('post')) {
+
+
+            $uploadDir = 'uploads/';
+            $filename = $_FILES['picture']['name'];
+            if (!empty($filename)) {
+
+                $extension = pathinfo($filename, PATHINFO_EXTENSION);
+                $filename = md5(uniqid()) . '.' . $extension;
+                $uploadFile = $uploadDir . basename($filename);
+                move_uploaded_file($_FILES['picture']['tmp_name'], $uploadFile);
+
+                $knowledge->setPicture($filename);
+                $knowledge->setDescription($description);
+                $knowledge->setName($name);
+                $knowledge->setRating($rating);
+                $knowledge->setUser($user);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($knowledge);
+
+                $em->flush();
+
+                $this->addFlash('success', 'Tu as bien ajouté ta connaissance !');
+                if (empty($filename)){
+                    $this->addFlash('danger', 'Il manque la photo !');
+                }
+            }
+        }
+            return $this->redirectToRoute('admin');
     }
 
 }

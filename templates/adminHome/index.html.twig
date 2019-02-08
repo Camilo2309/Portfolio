@@ -99,7 +99,8 @@
 
                 <h2>CONNAISSANCES</h2>
                 {% if app.user %}
-                    <h4><a href="#" style="text-align: right"><i class="fas fa-plus"  ></i></a></h4>
+                    {% include 'part/_modalAddKnowledge.html.twig' %}
+                    {#<h4><a href="#" style="text-align: right"><i class="fas fa-plus"  ></i></a></h4>#}
                 {% endif %}
 
                 <hr />
@@ -110,7 +111,7 @@
                             <div class="col-sm-4 symbol">
                                 <h2 class="h3">{{ knowledge.name }}</h2>
                                 <div class="w3-col">
-                                    <img src="{{ knowledge.picture }}" id="photo" alt="Photo of knowledge">
+                                    <img src="/uploads/{{ knowledge.picture }}" id="photo" alt="Photo of knowledge">
                                 </div>
                                 {% include 'part/_rating.html.twig'  with {'rating': knowledge.rating}%}
                                 <p>{{ knowledge.description }}</p>

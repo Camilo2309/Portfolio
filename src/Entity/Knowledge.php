@@ -11,6 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Knowledge
 {
+    public function __toString()
+    {
+        return $this->name;
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -40,7 +44,7 @@ class Knowledge
     private $rating;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="knowledge")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="knowledge", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

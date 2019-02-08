@@ -1,0 +1,51 @@
+<div class="bs-example">
+    <h4><a href="#exampleModal1" data-toggle="modal" style="text-align: right"><i class="fas fa-plus"  ></i></a></h4>
+</div>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter une connaissance</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form action="{{ path('addKnowledge') }}" method="post" enctype="multipart/form-data">
+                    <div style="margin: 0 30px">
+                        {#{% set user.knowledge = knowledge %}#}
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Nom...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" class="form-control" placeholder="Description..." ></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="picture">Photo</label>
+                            <input type="file" name="picture" id="picture" class="form-control" placeholder="Photo...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rating">Note</label>
+                            <input type="text" name="rating" id="rating" class="form-control" placeholder="Note de 0 à 5...">
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        {#<a href="{{ path('editAboutUs') }}">#}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button class="btn btn-theme btn-small" type="submit">Ajouter</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
