@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Entity\Knowledge;
+use App\Entity\Project;
 use App\Form\KnowledgeType;
 use App\Form\UserType;
 use App\Repository\KnowledgeRepository;
@@ -35,7 +36,9 @@ class AdminController extends AbstractController
     /**
      * @Route("/", name="admin" )
      * @param UserRepository $userRepository
+     * @param Project $project
      * @param ProjectRepository $projectRepository
+     * @param KnowledgeRepository $knowledgeRepository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -46,6 +49,8 @@ class AdminController extends AbstractController
         $projects = $projectRepository->findAll();
 
         $knowledge = $knowledgeRepository->findAll();
+
+
 
 
         return $this->render('adminHome/index.html.twig', [

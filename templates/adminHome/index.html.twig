@@ -97,7 +97,7 @@
 
                 <h2>CONNAISSANCES</h2>
                 {% if app.user %}
-                    {% include 'part/_modalAddKnowledge.html.twig' %}
+                    {% include 'partKnowledge/_modalAddKnowledge.html.twig' %}
                     {#<h4><a href="#" style="text-align: right"><i class="fas fa-plus"  ></i></a></h4>#}
                 {% endif %}
 
@@ -114,7 +114,7 @@
                                 {% include 'part/_rating.html.twig'  with {'rating': knowledge.rating}%}
                                 <p>{{ knowledge.description }}</p>
                                 {% if app.user %}
-                                    {% include 'part/_modalEditKnowledge.html.twig' %}
+                                    {% include 'partKnowledge/_modalEditKnowledge.html.twig' %}
                                     <a href="{{ path('deleteKnowledge', {id : knowledge.id }) }}"  onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ knowledge.name }} ?')"><i class="fas fa-trash-alt" style="display: inline" ></i></a>
                                 {% endif %}
                             </div>
@@ -129,7 +129,8 @@
                 <h2>MES PROJETS</h2>
 
                 {% if app.user %}
-                    <h4><a href="#" style="text-align: right"><i class="fas fa-plus"  ></i></a></h4>
+                    {% include 'partProject/_modalAddProject.html.twig' %}
+                    {#<h4><a href="#" style="text-align: right"><i class="fas fa-plus"  ></i></a></h4>#}
                 {% endif %}
 
                 <hr />
@@ -137,7 +138,7 @@
                 <ul class="catCardList">
                     {% for project in projects %}
                         <li class="catCardList">
-                            <div class="catCard"><a href="{{ project.url }}"><img src="{{ project.picture }}" alt=""></a>
+                            <div class="catCard"><a href="{{ project.url }}"><img src="/uploads/{{ project.picture }}" alt=""></a>
                                 <div class="lowerCatCard">
                                     <h3>{{ project.title }}</h3>
                                     <p>{{ project.content }}</p>
@@ -151,8 +152,8 @@
                                 </div>
                             </div>
                             {% if app.user %}
-                                <a href="#"><i class="fas fa-edit" style="display: inline"></i></a>
-                                <a href="#"><i class="fas fa-trash-alt" style="display: inline"></i></a>
+                                {% include 'partProject/_modalEditProject.html.twig' %}
+                                <a href="{{ path('deleteProject', {id : project.id }) }}"  onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ project.title }} ?')"><i class="fas fa-trash-alt" style="display: inline" ></i></a>
                             {% endif %}
                         </li>
                     {% endfor %}
