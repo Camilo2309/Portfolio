@@ -54,7 +54,7 @@ class HomeController extends AbstractController
 
                 // Dans le cas de l'erreur.
                 if(in_array("missing-input-response", $resp->getErrorCodes())){
-                    $this->addFlash('danger', "Valadation robot non bonne");
+                    $this->addFlash('danger', "Validation robot non bonne");
                 }
 
             }
