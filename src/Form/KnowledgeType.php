@@ -8,6 +8,9 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class KnowledgeType extends ApplicationType
@@ -19,6 +22,7 @@ class KnowledgeType extends ApplicationType
             ->add('picture', FileType::class, $this->getConfiguration('Photo', 'Photo de la techno...'))
             ->add('description', TextareaType::class, $this->getConfiguration('Description', 'Descirption de ce que je sais...'))
             ->add('rating', IntegerType::class, $this->getConfiguration('Note' , 'Note tes connaissances de 1 à 5...'))
+
         ;
     }
 
@@ -28,4 +32,5 @@ class KnowledgeType extends ApplicationType
             'data_class' => Knowledge::class,
         ]);
     }
+
 }

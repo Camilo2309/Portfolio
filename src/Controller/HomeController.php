@@ -6,8 +6,10 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Entity\User;
 use App\Form\ContactType;
+use App\Form\UserType;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,47 +61,15 @@ class HomeController extends AbstractController
 
             }
 
-        }
+        };
 
 
         return $this->render('home/index.html.twig', [
             'user' => $user,
             'projects' => $projects,
             'form' => $form->createView(),
+
         ]);
-    }
-
-    /**
-     * @Route("/edit/home", name="edit_home")
-     */
-    public function editHome(Request $request, User $user): Response
-    {
-//        modification du user
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('edit_home', [
-                'id' => $user->getId(),
-            ]);
-        }
-//        fin de modification du user
-
-        return $this->render('editHome/index.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/bobby", name="bobby")
-     * @return Response
-     */
-    public function ntp()
-    {
-        return new Response("Nique ta mere");
     }
 
 

@@ -1,0 +1,58 @@
+
+{#<button type="button"  data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><i class="fas fa-edit"></i></button>#}
+
+<div class="bs-example">
+    <a href="#exampleModal" data-toggle="modal"><i class="fas fa-edit"></i></a>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modifier mes infos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form action="{{ path('editProfil') }}" method="post" enctype="multipart/form-data">
+                    <div style="margin: 0 30px">
+                        <div class="form-group">
+                            <label for="lastName">Nom</label>
+                            <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Nom..." value="{{ user.lastName }}">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="firstName">Prénom</label>
+                            <input type="text" name="firstName" id="firstName" class="form-control" placeholder="Prénom..." value="{{ user.firstName }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="picture">Photo</label>
+                            <input type="file" name="picture" id="picture" class="form-control" placeholder="image..." value="{{ user.picture }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="titlePresentation">Titre</label>
+                            <input type="text" name="titlePresentation" id="titlePresentation" class="form-control" placeholder="Titre..." value="{{ user.titlePresentation }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="presentation">Présentation</label>
+                            <textarea name="presentation" id="presentation" class="form-control" placeholder="Présentation..." >{{ user.presentation }}</textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        {#<a href="{{ path('editAboutUs') }}">#}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button class="btn btn-theme btn-small" type="submit">Modifier</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

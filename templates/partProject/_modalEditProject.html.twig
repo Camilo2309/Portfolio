@@ -1,0 +1,56 @@
+<div class="bs-example">
+    <h4><a href="#modalEditProject{{ project.id }}" data-toggle="modal" style="text-align: right"><i class="fas fa-edit" style="display: inline"></i></a></h4>
+</div>
+
+<div class="modal fade" id="modalEditProject{{ project.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modifier un projet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form action="{{ path('editProject', { 'id' : project.id}) }}" method="post" enctype="multipart/form-data">
+                    <div style="margin: 0 30px">
+                        <div class="form-group">
+                            <label for="title">Titre</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="Titre..." value="{{ project.title }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="content">Contenu</label>
+                            <textarea name="content" id="content" class="form-control" placeholder="Contenu..." >{{ project.content }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="url">Url</label>
+                            <input type="text" name="url" id="url" class="form-control" placeholder="Lien du projet..." value="{{ project.url }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="picture">Photo</label>
+                            <input type="file" name="picture" id="picture" class="form-control" placeholder="Photo..." value="{{ project.picture }}">
+                        </div>
+
+                        <label for="technology">Technos</label>
+
+                        {% for techno in knowledge %}
+                            <input style="display: inline " type="checkbox" id="technology" name="technology[]" value="{{ techno.id }}">{{ techno.name }}<br>
+                        {% endfor %}
+
+
+                    </div>
+                    <div class="modal-footer">
+                        {#<a href="{{ path('editAboutUs') }}">#}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button class="btn btn-theme btn-small" type="submit">Ajouter</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

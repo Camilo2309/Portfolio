@@ -16,7 +16,7 @@ class UserType extends ApplicationType
     {
         $builder
             ->add('email', EmailType::class, $this->getConfiguration("Email", "camilo@gmail.com"))
-            ->add('picture', FileType::class, $this->getConfiguration('Photo', 'Télécharger une photo ...'))
+            ->add('picture', FileType::class, ['data_class' => null], $this->getConfiguration('Photo', 'Télécharger une photo ...'))
             ->add('firstName', TextType::class, $this->getConfiguration("Prénom", "Mon prénom..."))
             ->add('lastName', TextType::class, $this->getConfiguration("Nom", "Mon nom..."))
             ->add('titlePresentation', TextType::class, $this->getConfiguration("Titre", "Titre présentation ..."))
