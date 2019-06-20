@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use phpDocumentor\Reflection\Project;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -28,7 +29,6 @@ class UserRepository extends ServiceEntityRepository
             ->select('user', 'experiences', 'knowledge')
             ->where('user.email = :email')
             ->join('user.experiences', 'experiences')
-            ->join('experiences.experienceLists', 'experience_lists')
             ->join('user.knowledge', 'knowledge')
             ->setParameter('email', $email)
             ->getQuery()

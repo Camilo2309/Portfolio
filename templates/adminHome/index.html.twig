@@ -126,9 +126,8 @@
             <div class="container">
                 <h2>EXPERIENCES PROFESSIONNELLES</h2>
                 {% if app.user %}
-                    <h4><a href="#" style="text-align: right"><i class="fas fa-plus"  ></i></a></h4>
+                    {% include 'partProfessionalExperience/_modalAddExperience.html.twig' %}
                 {% endif %}
-
                 <hr />
 
                 <div class="row">
@@ -139,16 +138,6 @@
                             </div>
                             <h4>{{ experience.title }}</h4>
                             <h6>{{ experience.dated }}</h6>
-                            <ul>
-                                {% for experienceList in experience.experienceLists %}
-                                    <li>
-                                        - <strong>{{ experienceList.enterprise }}</strong>, {{ experienceList.city }}
-                                    </li>
-                                    <li>
-                                        {{ experienceList.content }}
-                                    </li>
-                                {% endfor %}
-                            </ul>
                             {% if app.user %}
                                 <a href="#"><i class="fas fa-edit" style="display: inline"></i></a>
                                 <a href="#"><i class="fas fa-trash-alt" style="display: inline"></i></a>
@@ -158,31 +147,6 @@
                 </div>
             </div>
         </section>
-
-
-        {#<section id="contact" class="sec-contact">#}
-            {#<div class="container">#}
-                {#<h2>CONTACTEZ-MOI</h2>#}
-
-                {#<hr />#}
-
-                {#<div class="row">#}
-                    {#<div class="col-sm-4 col-sm-offset-4">#}
-                        {#<form method="POST">#}
-                            {#{{ form_start(form) }}#}
-
-                            {#{{ form_widget(form) }}#}
-                            {#<div class="g-recaptcha" data-sitekey="6LddQ40UAAAAAJgjmYikONBb0rMChUeFE-cfhcn8"></div>#}
-                            {#<div class="form-group">#}
-                                {#<button class="btn btn-default center-block" type="submit" value="Hire me">Envoyer <i class="far fa-envelope"></i></button>#}
-                            {#</div>#}
-                            {#{{ form_end(form) }}#}
-                        {#</form>#}
-                    {#</div>#}
-                {#</div>#}
-            {#</div>#}
-        {#</section>#}
-
 
 
         <footer id="footer">

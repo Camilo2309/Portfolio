@@ -34,11 +34,6 @@ class Experience
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ExperienceList", mappedBy="experience")
-     */
-    private $experienceLists;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $icone;
@@ -47,7 +42,6 @@ class Experience
     public function __construct()
     {
         $this->listing = new ArrayCollection();
-        $this->experienceLists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -87,37 +81,6 @@ class Experience
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|ExperienceList[]
-     */
-    public function getExperienceLists(): Collection
-    {
-        return $this->experienceLists;
-    }
-
-    public function addExperienceList(ExperienceList $experienceList): self
-    {
-        if (!$this->experienceLists->contains($experienceList)) {
-            $this->experienceLists[] = $experienceList;
-            $experienceList->setExperience($this);
-        }
-
-        return $this;
-    }
-
-    public function removeExperienceList(ExperienceList $experienceList): self
-    {
-        if ($this->experienceLists->contains($experienceList)) {
-            $this->experienceLists->removeElement($experienceList);
-            // set the owning side to null (unless already changed)
-            if ($experienceList->getExperience() === $this) {
-                $experienceList->setExperience(null);
-            }
-        }
 
         return $this;
     }

@@ -117,16 +117,6 @@
                             </div>
                             <h4>{{ experience.title }}</h4>
                             <h6>{{ experience.dated }}</h6>
-                            <ul>
-                                {% for experienceList in experience.experienceLists %}
-                                    <li>
-                                        - <strong>{{ experienceList.enterprise }}</strong>, {{ experienceList.city }}
-                                    </li>
-                                    <li>
-                                        {{ experienceList.content }}
-                                    </li>
-                                {% endfor %}
-                            </ul>
                         </div>
                     {% endfor %}
                 </div>

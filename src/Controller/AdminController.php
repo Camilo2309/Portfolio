@@ -9,10 +9,9 @@
 namespace App\Controller;
 
 
+use App\Entity\Experience;
 use App\Entity\Knowledge;
 use App\Entity\Project;
-use App\Form\KnowledgeType;
-use App\Form\UserType;
 use App\Repository\KnowledgeRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
@@ -24,8 +23,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Form\FormTypeInterface;
 
 
 /**
@@ -36,31 +33,26 @@ class AdminController extends AbstractController
     /**
      * @Route("/", name="admin" )
      * @param UserRepository $userRepository
-     * @param Project $project
      * @param ProjectRepository $projectRepository
      * @param KnowledgeRepository $knowledgeRepository
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function admin(UserRepository $userRepository, ProjectRepository $projectRepository, KnowledgeRepository $knowledgeRepository)
+    public function admin(UserRepository $userRepository,
+                          ProjectRepository $projectRepository,
+                          KnowledgeRepository $knowledgeRepository)
     {
 
         $user = $userRepository->findUser('bolanos.camilo2309@gmail.com');
         $projects = $projectRepository->findAll();
-
         $knowledge = $knowledgeRepository->findAll();
 
-
-
-
         return $this->render('adminHome/index.html.twig', [
-            'user' => $user,
-            'projects' => $projects,
-            'knowledge' => $knowledge,
-
+            'user'       => $user,
+            'projects'   => $projects,
+            'knowledge'  => $knowledge,
         ]);
     }
-
 
     /**
      * @Route("/update/profil", name="editProfil", methods={"POST"})

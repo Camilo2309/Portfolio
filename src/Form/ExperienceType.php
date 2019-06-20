@@ -17,12 +17,6 @@ class ExperienceType extends ApplicationType
             ->add('title', TextType::class, $this->getConfiguration("Titre", "Titre du de l'experience ..."))
             ->add('dated', TextType::class, $this->getConfiguration('Date', "Durée de l'experience ..."))
             ->add('icone', FileType::class, $this->getConfiguration('Icône', 'Télécharge un icône, met un truc bien  !'))
-            ->add('experienceLists', CollectionType::class,
-                [
-                    'entry_type' => ExperienceListType::class,
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                ])
         ;
     }
 

@@ -1,8 +1,8 @@
 <div class="bs-example">
-    <h4><a href="#modalAddProject" data-toggle="modal" style="text-align: right"><i class="fas fa-plus"  ></i></a></h4>
+    <h4><a href="#modalAddExperience" data-toggle="modal" style="text-align: right"><i class="fas fa-plus"  ></i></a></h4>
 </div>
 
-<div class="modal fade" id="modalAddProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalAddExperience" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,7 +13,7 @@
             </div>
             <div class="modal-body">
 
-                <form action="{{ path('addProject') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ path('professional_experiences') }}" method="post" enctype="multipart/form-data">
                     <div style="margin: 0 30px">
                         <div class="form-group">
                             <label for="title">Titre</label>
@@ -21,27 +21,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="content">Contenu</label>
-                            <textarea name="content" id="content" class="form-control" placeholder="Contenu..." ></textarea>
+                            <label for="dated">Date</label>
+                            <input type="text" name="dated" id="dated" class="form-control" placeholder="De quand à quand...">
                         </div>
 
                         <div class="form-group">
-                            <label for="url">Url</label>
-                            <input type="text" name="url" id="url" class="form-control" placeholder="Lien du projet...">
+                            <label for="icone">Icône</label>
+                            <input type="file" name="icone" id="icone" class="form-control" placeholder="Photo...">
                         </div>
-
-                        <div class="form-group">
-                            <label for="picture">Photo</label>
-                            <input type="file" name="picture" id="picture" class="form-control" placeholder="Photo...">
-                        </div>
-
-                        <label for="technology">Technos</label>
-
-                        {% for techno in knowledge %}
-                                <input style="display: inline " type="checkbox" id="technology"
-                                       name="technology[]" value="{{ techno.id }}">{{ techno.name }}<br>
-                        {% endfor %}
-
 
                     </div>
                     <div class="modal-footer">

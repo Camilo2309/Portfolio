@@ -30,7 +30,8 @@ class ProjectController1 extends AbstractController
      * @param uploadManager $uploadManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addProject(Project $project = null, Request $request, ObjectManager $manager, uploadManager $uploadManager)
+    public function addProject(Project $project = null, Request $request,
+                               ObjectManager $manager, uploadManager $uploadManager)
     {
 
         $project = new Project();
