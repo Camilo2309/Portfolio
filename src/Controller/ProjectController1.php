@@ -82,7 +82,8 @@ class ProjectController1 extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function editProject(Project $id, Request $request,
-                                ProjectRepository $projectRepository, uploadManager $uploadManager,
+                                ProjectRepository $projectRepository,
+                                uploadManager $uploadManager,
                                 EntityManagerInterface $em)
     {
 
@@ -107,7 +108,6 @@ class ProjectController1 extends AbstractController
             $project->setTitle($title);
             $project->setContent($content);
             $project->setUrl($url);
-
             $em->flush();
 
             $this->addFlash('success', "Tu as bien modifié ton projet !");

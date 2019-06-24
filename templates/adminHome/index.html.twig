@@ -56,9 +56,9 @@
             <div class="container">
 
                 <h2>CONNAISSANCES</h2>
+
                 {% if app.user %}
                     {% include 'partKnowledge/_modalAddKnowledge.html.twig' %}
-                    {#<h4><a href="#" style="text-align: right"><i class="fas fa-plus"  ></i></a></h4>#}
                 {% endif %}
 
                 <hr />
@@ -134,13 +134,13 @@
                     {% for experience in user.experiences %}
                         <div class="col-sm-4 symbol">
                             <div class="w3-col m6 w3-center w3-section">
-                                <img src="{{ experience.icone }}" id="experiencePhoto" class="w3-circle" alt="Photo of Me">
+                                <img src="/uploads/{{ experience.icone }}" id="experiencePhoto" class="w3-circle" alt="Photo of Me">
                             </div>
                             <h4>{{ experience.title }}</h4>
                             <h6>{{ experience.dated }}</h6>
                             {% if app.user %}
-                                <a href="#"><i class="fas fa-edit" style="display: inline"></i></a>
-                                <a href="#"><i class="fas fa-trash-alt" style="display: inline"></i></a>
+                                {% include 'partProfessionalExperience/_modalEditExperience.html.twig' %}
+                                <a href="{{ path('deleteExperience', {id : experience.id }) }}"  onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ experience.title }} ?')"><i class="fas fa-trash-alt" style="display: inline" ></i></a>
                             {% endif %}
                         </div>
                     {% endfor %}
@@ -153,7 +153,7 @@
             <div class="container">
                 <ul class="soc-media-ul">
                     <li>
-                        <a href="https://www.linkedin.com/in/camilo-bola%C3%B1os-4034a5171/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.linkedin.com/in/camilo-bola%C3%B1os-4034a5171/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     </li>
 
                     <li>

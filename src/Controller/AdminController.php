@@ -9,16 +9,10 @@
 namespace App\Controller;
 
 
-use App\Entity\Experience;
-use App\Entity\Knowledge;
-use App\Entity\Project;
 use App\Repository\KnowledgeRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
-use App\Services\uploadManager;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,9 +42,9 @@ class AdminController extends AbstractController
         $knowledge = $knowledgeRepository->findAll();
 
         return $this->render('adminHome/index.html.twig', [
-            'user'       => $user,
-            'projects'   => $projects,
-            'knowledge'  => $knowledge,
+            'user' => $user,
+            'projects' => $projects,
+            'knowledge' => $knowledge,
         ]);
     }
 

@@ -34,7 +34,6 @@
                 <hr/>
                 <div class="w3-col m6 w3-center w3-section">
                     <img src="/uploads/{{ user.picture }}" id="profile" class="w3-circle" alt="Photo of Me">
-
                 </div>
                 <hr/>
 
@@ -61,7 +60,7 @@
                             <div class="col-sm-4 symbol">
                                 <h2 class="h3">{{ knowledge.name }}</h2>
                                 <div class="w3-col">
-                                    <img src="{{ knowledge.picture }}" id="photo" alt="Photo of knowledge">
+                                    <img src="/uploads/{{ knowledge.picture }}" id="photo" alt="Photo of knowledge">
                                 </div>
                                 {% include 'part/_rating.html.twig'  with {'rating': knowledge.rating} %}
                                 <p>{{ knowledge.description }}</p>
@@ -81,8 +80,9 @@
                 <ul class="catCardList">
                     {% for project in projects %}
                         <li class="catCardList">
-                            <div class="catCard"><a href="{{ project.url }}"><img src="{{ project.picture }}"
+                            <div class="catCard"><a href="{{ project.url }}"><img src="/uploads/{{ project.picture }}"
                                                                                   alt=""></a>
+
                                 <div class="lowerCatCard">
                                     <h3>{{ project.title }}</h3>
                                     <p>{{ project.content }}</p>
@@ -112,7 +112,7 @@
                     {% for experience in user.experiences %}
                         <div class="col-sm-4 symbol">
                             <div class="w3-col m6 w3-center w3-section">
-                                <img src="{{ experience.icone }}" id="experiencePhoto" class="w3-circle"
+                                <img src="/uploads/{{ experience.icone }}" id="experiencePhoto" class="w3-circle"
                                      alt="Photo of Me">
                             </div>
                             <h4>{{ experience.title }}</h4>

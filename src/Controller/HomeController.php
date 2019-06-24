@@ -20,9 +20,17 @@ class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
+     * @param UserRepository $userRepository
+     * @param ProjectRepository $projectRepository
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @return Response
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function index(UserRepository $userRepository, ProjectRepository $projectRepository,
-                          Request $request, \Swift_Mailer $mailer) : Response
+    public function index(UserRepository $userRepository,
+                          ProjectRepository $projectRepository,
+                          Request $request,
+                          \Swift_Mailer $mailer): Response
     {
         $user = $userRepository->findUser('bolanos.camilo2309@gmail.com');
         $projects = $projectRepository->findAll();
@@ -34,10 +42,9 @@ class HomeController extends AbstractController
         $name = $form->getData()->getFullName();
 
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
 
-            $recaptcha = new ReCaptcha("6LddQ40UAAAAALGuMKbwCuPg7LeP2qC7Saoy54ut");
+            $recaptcha = new ReCaptcha(getenv('RECAPTCHA_KEY'));
             $resp = $recaptcha->verify($request->get("g-recaptcha-response"));
 
             if ($resp->isSuccess()) {
@@ -55,7 +62,7 @@ class HomeController extends AbstractController
             } else {
 
                 // Dans le cas de l'erreur.
-                if(in_array("missing-input-response", $resp->getErrorCodes())){
+                if (in_array("missing-input-response", $resp->getErrorCodes())) {
                     $this->addFlash('danger', "Valadation robot non bonne");
                 }
 
@@ -63,14 +70,10 @@ class HomeController extends AbstractController
 
         };
 
-
         return $this->render('home/index.html.twig', [
             'user' => $user,
             'projects' => $projects,
             'form' => $form->createView(),
-
         ]);
     }
-
-
 }
