@@ -9,7 +9,6 @@
             {% include 'part/_navbar.html.twig' %}
         </header>
 
-
        <section id="home" class="sec-main">
             <div class="row">
                 <div class="col">
@@ -54,7 +53,7 @@
             </div>
         </section>
 
-        <section id="folio" class="sec-about">
+        <section id="services" class="sec-about">
             <div class="container">
 
                 <h2>CONNAISSANCES</h2>
@@ -72,10 +71,10 @@
 
                                     {% include 'part/_rating.html.twig'  with {'rating': knowledge.rating} %}
 
-                                    <div>
-                                        <h2>{{ knowledge.name }}</h2>
+                                   <div>
+                                        <h3><strong>{{ knowledge.name }}</strong></h3>
                                         <p>{{ knowledge.description }}</p>
-                                    </div>
+                                   </div>
                                 </div>
                             </li>
                         {% endif %}
@@ -97,14 +96,14 @@
                             <div class="catCard"><a href="{{ project.url }}"><img src="/uploads/{{ project.picture }}"
                                                                                   alt=""></a>
                                 <div class="lowerCatCard">
-                                    <h3>{{ project.title }}</h3>
+                                    <h3><strong>{{ project.title }}</strong></h3>
                                     <p>{{ project.content }}</p>
-                                    <h4>Technos utilisées :</h4>
+                      {#             <h4>Technos utilisées :</h4>
                                     <ul>
                                         {% for knowledge in project.technology %}
                                             <li>- {{ knowledge.name }}</li>
                                         {% endfor %}
-                                    </ul>
+                                    </ul>#}
                                     <div id="catCardButton" class="button"><a href="{{ project.url }}">Voir</a></div>
                                 </div>
                             </div>
@@ -115,29 +114,26 @@
             </div>
         </section>
 
-        <section id="folio" class="sec-about">
+        <section id="testimonials" class="sec-about">
             <div class="container">
                 <h2>EXPERIENCES PROFESSIONNELLES</h2>
-
                 <hr/>
-
                 <ul class="catCardList">
                     {% for experience in user.experiences %}
                         <li class="catCardList">
-                                 <div class="w3-col">
-                                        <img src="/uploads/{{ experience.icone }}" id="photo" alt="Photo of Me">
-                                    </div>
-
-                                    <h4>{{ experience.title }}</h4>
-                                    <h6>{{ experience.dated }}</h6>
-                                </div>
+                            <div class="w3-col">
+                                <img src="/uploads/{{ experience.icone }}" id="photo" alt="Photo of Me">
                             </div>
+
+                            <h3><strong>{{ experience.title }}</strong></h3>
+                            <p>{{ experience.dated }}</p>
+
                         </li>
                     {% endfor %}
                 </ul>
-
             </div>
         </section>
+
 
         <section id="contact" class="sec-contact">
             <div class="container">
