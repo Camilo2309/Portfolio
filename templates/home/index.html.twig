@@ -9,7 +9,8 @@
             {% include 'part/_navbar.html.twig' %}
         </header>
 
-        <section id="home" class="sec-main">
+
+       <section id="home" class="sec-main">
             <div class="row">
                 <div class="col">
                     {% for label, messages in app.flashes %}
@@ -30,44 +31,57 @@
 
             <div class="container">
                 <h2>À PROPOS DE MOI ...</h2>
-
                 <hr/>
-                <div class="w3-col m6 w3-center w3-section">
-                    <img src="/uploads/{{ user.picture }}" id="profile" class="w3-circle" alt="Photo of Me">
+                <div class="row">
+
+                    <div class="w3-col m6 w3-center w3-section">
+                        {% if user.picture is null %}
+                            <img alt="photo of me" id="profile" class="w3-circle"
+                                 src="/public/image/modiPhotoCamilo.PNG">
+                        {% else %}
+                            <img src="/uploads/{{ user.picture }}" id="profile" class="w3-circle" alt="Photo of Me">
+                        {% endif %}
+
+                    </div>
                 </div>
                 <hr/>
+            </div>
 
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <p>{{ user.presentation }}</p>
-                    </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <em><h4>{{ user.presentation }}</h4></em>
                 </div>
             </div>
         </section>
 
-
-        <section id="services" class="sec-about">
+        <section id="folio" class="sec-about">
             <div class="container">
-
 
                 <h2>CONNAISSANCES</h2>
 
                 <hr/>
 
-                <div class="row">
+                <ul class="catCardList">
                     {% for knowledge in user.knowledge %}
                         {% if knowledge.rating|length > 0 %}
-                            <div class="col-sm-4 symbol">
-                                <h2 class="h3">{{ knowledge.name }}</h2>
-                                <div class="w3-col">
-                                    <img src="/uploads/{{ knowledge.picture }}" id="photo" alt="Photo of knowledge">
+                            <li class="catCardList">
+                                <div class="catCarde">
+                                    <div class="w3-col">
+                                        <img src="/uploads/{{ knowledge.picture }}" id="photo" alt="Photo of knowledge">
+                                    </div>
+
+                                    {% include 'part/_rating.html.twig'  with {'rating': knowledge.rating} %}
+
+                                    <div>
+                                        <h2>{{ knowledge.name }}</h2>
+                                        <p>{{ knowledge.description }}</p>
+                                    </div>
                                 </div>
-                                {% include 'part/_rating.html.twig'  with {'rating': knowledge.rating} %}
-                                <p>{{ knowledge.description }}</p>
-                            </div>
+                            </li>
                         {% endif %}
                     {% endfor %}
-                </div>
+                </ul>
+
             </div>
         </section>
 
@@ -82,7 +96,6 @@
                         <li class="catCardList">
                             <div class="catCard"><a href="{{ project.url }}"><img src="/uploads/{{ project.picture }}"
                                                                                   alt=""></a>
-
                                 <div class="lowerCatCard">
                                     <h3>{{ project.title }}</h3>
                                     <p>{{ project.content }}</p>
@@ -102,27 +115,29 @@
             </div>
         </section>
 
-        <section id="testimonials" class="sec-about ">
+        <section id="folio" class="sec-about">
             <div class="container">
                 <h2>EXPERIENCES PROFESSIONNELLES</h2>
 
                 <hr/>
 
-                <div class="row">
+                <ul class="catCardList">
                     {% for experience in user.experiences %}
-                        <div class="col-sm-4 symbol">
-                            <div class="w3-col m6 w3-center w3-section">
-                                <img src="/uploads/{{ experience.icone }}" id="experiencePhoto" class="w3-circle"
-                                     alt="Photo of Me">
+                        <li class="catCardList">
+                                 <div class="w3-col">
+                                        <img src="/uploads/{{ experience.icone }}" id="photo" alt="Photo of Me">
+                                    </div>
+
+                                    <h4>{{ experience.title }}</h4>
+                                    <h6>{{ experience.dated }}</h6>
+                                </div>
                             </div>
-                            <h4>{{ experience.title }}</h4>
-                            <h6>{{ experience.dated }}</h6>
-                        </div>
+                        </li>
                     {% endfor %}
-                </div>
+                </ul>
+
             </div>
         </section>
-
 
         <section id="contact" class="sec-contact">
             <div class="container">

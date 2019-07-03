@@ -58,37 +58,37 @@
         <section id="folio" class="sec-about">
             <div class="container">
 
-                    <h2>CONNAISSANCES</h2>
+                <h2>CONNAISSANCES</h2>
 
-                    {% if app.user %}
-                        {% include 'partKnowledge/_modalAddKnowledge.html.twig' %}
-                    {% endif %}
+                {% if app.user %}
+                    {% include 'partKnowledge/_modalAddKnowledge.html.twig' %}
+                {% endif %}
 
-                    <hr/>
+                <hr/>
 
                 <ul class="catCardList">
                     {% for knowledge in user.knowledge %}
                         {% if knowledge.rating|length > 0 %}
-                        <li class="catCardList">
-                            <div class="catCarde">
-                                <div class="w3-col">
-                                    <img src="/uploads/{{ knowledge.picture }}" id="photo" alt="Photo of knowledge">
-                                </div>
+                            <li class="catCardList">
+                                <div class="catCarde">
+                                    <div class="w3-col">
+                                        <img src="/uploads/{{ knowledge.picture }}" id="photo" alt="Photo of knowledge">
+                                    </div>
 
-                                {% include 'part/_rating.html.twig'  with {'rating': knowledge.rating} %}
+                                    {% include 'part/_rating.html.twig'  with {'rating': knowledge.rating} %}
 
-                                <div>
-                                    <h2>{{ knowledge.name }}</h2>
-                                    <p>{{ knowledge.description }}</p>
+                                    <div>
+                                        <h2>{{ knowledge.name }}</h2>
+                                        <p>{{ knowledge.description }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            {% if app.user %}
-                                {% include 'partKnowledge/_modalEditKnowledge.html.twig' %}
-                                <a href="{{ path('deleteKnowledge', {id : knowledge.id }) }}"
-                                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ knowledge.name }} ?')"><i
-                                            class="fas fa-trash-alt" style="display: inline"></i></a>
-                            {% endif %}
-                        </li>
+                                {% if app.user %}
+                                    {% include 'partKnowledge/_modalEditKnowledge.html.twig' %}
+                                    <a href="{{ path('deleteKnowledge', {id : knowledge.id }) }}"
+                                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ knowledge.name }} ?')"><i
+                                                class="fas fa-trash-alt" style="display: inline"></i></a>
+                                {% endif %}
+                            </li>
                         {% endif %}
                     {% endfor %}
                 </ul>
@@ -137,35 +137,38 @@
             </div>
         </section>
 
-        <section id="testimonials" class="sec-about ">
+        <section id="folio" class="sec-about">
             <div class="container">
                 <h2>EXPERIENCES PROFESSIONNELLES</h2>
+
                 {% if app.user %}
                     {% include 'partProfessionalExperience/_modalAddExperience.html.twig' %}
                 {% endif %}
                 <hr/>
 
-                <div class="row">
+                <ul class="catCardList">
                     {% for experience in user.experiences %}
-                        <div class="col-sm-4 symbol">
-                            <div class="w3-col m6 w3-center w3-section">
-                                <img src="/uploads/{{ experience.icone }}" id="experiencePhoto" class="w3-circle"
-                                     alt="Photo of Me">
+                        <li class="catCardList">
+                                 <div class="w3-col">
+                                        <img src="/uploads/{{ experience.icone }}" id="photo" alt="Photo of Me">
+                                    </div>
+
+                                    <h4>{{ experience.title }}</h4>
+                                    <h6>{{ experience.dated }}</h6>
+                                </div>
+                                {% if app.user %}
+                                    {% include 'partProfessionalExperience/_modalEditExperience.html.twig' %}
+                                    <a href="{{ path('deleteExperience', {id : experience.id }) }}"
+                                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ experience.title }} ?')"><i
+                                                class="fas fa-trash-alt" style="display: inline"></i></a>
+                                {% endif %}
                             </div>
-                            <h4>{{ experience.title }}</h4>
-                            <h6>{{ experience.dated }}</h6>
-                            {% if app.user %}
-                                {% include 'partProfessionalExperience/_modalEditExperience.html.twig' %}
-                                <a href="{{ path('deleteExperience', {id : experience.id }) }}"
-                                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ experience.title }} ?')"><i
-                                            class="fas fa-trash-alt" style="display: inline"></i></a>
-                            {% endif %}
-                        </div>
+                        </li>
                     {% endfor %}
-                </div>
+                </ul>
+
             </div>
         </section>
-
 
         <footer id="footer">
             <div class="container">
