@@ -32,55 +32,67 @@
                 {% if app.user %}
                     {% include 'part/_modalAboutUs.html.twig' %}
                 {% endif %}
-                <hr />
-                <div class="w3-col m6 w3-center w3-section">
-                    {% if user.picture is null %}
-                        <img alt="photo of me" id="profile" class="w3-circle" src="/public/image/modiPhotoCamilo.PNG">
-                    {% else %}
-                        <img src="/uploads/{{ user.picture }}" id="profile" class="w3-circle" alt="Photo of Me">
-                    {% endif %}
+                <hr/>
+                <div class="row">
 
+                    <div class="w3-col m6 w3-center w3-section">
+                        {% if user.picture is null %}
+                            <img alt="photo of me" id="profile" class="w3-circle"
+                                 src="/public/image/modiPhotoCamilo.PNG">
+                        {% else %}
+                            <img src="/uploads/{{ user.picture }}" id="profile" class="w3-circle" alt="Photo of Me">
+                        {% endif %}
+
+                    </div>
                 </div>
                 <hr/>
+            </div>
 
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <p>{{ user.presentation }}</p>
-                    </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <em><h4>{{ user.presentation }}</h4></em>
                 </div>
             </div>
         </section>
 
-
-        <section id="services" class="sec-about">
+        <section id="folio" class="sec-about">
             <div class="container">
 
-                <h2>CONNAISSANCES</h2>
+                    <h2>CONNAISSANCES</h2>
 
-                {% if app.user %}
-                    {% include 'partKnowledge/_modalAddKnowledge.html.twig' %}
-                {% endif %}
+                    {% if app.user %}
+                        {% include 'partKnowledge/_modalAddKnowledge.html.twig' %}
+                    {% endif %}
 
-                <hr />
+                    <hr/>
 
-                <div class="row">
+                <ul class="catCardList">
                     {% for knowledge in user.knowledge %}
                         {% if knowledge.rating|length > 0 %}
-                            <div class="col-sm-4 symbol">
-                                <h2 class="h3">{{ knowledge.name }}</h2>
+                        <li class="catCardList">
+                            <div class="catCarde">
                                 <div class="w3-col">
                                     <img src="/uploads/{{ knowledge.picture }}" id="photo" alt="Photo of knowledge">
                                 </div>
-                                {% include 'part/_rating.html.twig'  with {'rating': knowledge.rating}%}
-                                <p>{{ knowledge.description }}</p>
-                                {% if app.user %}
-                                    {% include 'partKnowledge/_modalEditKnowledge.html.twig' %}
-                                    <a href="{{ path('deleteKnowledge', {id : knowledge.id }) }}"  onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ knowledge.name }} ?')"><i class="fas fa-trash-alt" style="display: inline" ></i></a>
-                                {% endif %}
+
+                                {% include 'part/_rating.html.twig'  with {'rating': knowledge.rating} %}
+
+                                <div>
+                                    <h2>{{ knowledge.name }}</h2>
+                                    <p>{{ knowledge.description }}</p>
+                                </div>
                             </div>
+                            {% if app.user %}
+                                {% include 'partKnowledge/_modalEditKnowledge.html.twig' %}
+                                <a href="{{ path('deleteKnowledge', {id : knowledge.id }) }}"
+                                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ knowledge.name }} ?')"><i
+                                            class="fas fa-trash-alt" style="display: inline"></i></a>
+                            {% endif %}
+                        </li>
                         {% endif %}
                     {% endfor %}
-                </div>
+                </ul>
+
             </div>
         </section>
 
@@ -93,12 +105,13 @@
                     {#<h4><a href="#" style="text-align: right"><i class="fas fa-plus"  ></i></a></h4>#}
                 {% endif %}
 
-                <hr />
+                <hr/>
 
                 <ul class="catCardList">
                     {% for project in projects %}
                         <li class="catCardList">
-                            <div class="catCard"><a href="{{ project.url }}"><img src="/uploads/{{ project.picture }}" alt=""></a>
+                            <div class="catCard"><a href="{{ project.url }}"><img src="/uploads/{{ project.picture }}"
+                                                                                  alt=""></a>
                                 <div class="lowerCatCard">
                                     <h3>{{ project.title }}</h3>
                                     <p>{{ project.content }}</p>
@@ -113,7 +126,9 @@
                             </div>
                             {% if app.user %}
                                 {% include 'partProject/_modalEditProject.html.twig' %}
-                                <a href="{{ path('deleteProject', {id : project.id }) }}"  onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ project.title }} ?')"><i class="fas fa-trash-alt" style="display: inline" ></i></a>
+                                <a href="{{ path('deleteProject', {id : project.id }) }}"
+                                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ project.title }} ?')"><i
+                                            class="fas fa-trash-alt" style="display: inline"></i></a>
                             {% endif %}
                         </li>
                     {% endfor %}
@@ -128,19 +143,22 @@
                 {% if app.user %}
                     {% include 'partProfessionalExperience/_modalAddExperience.html.twig' %}
                 {% endif %}
-                <hr />
+                <hr/>
 
                 <div class="row">
                     {% for experience in user.experiences %}
                         <div class="col-sm-4 symbol">
                             <div class="w3-col m6 w3-center w3-section">
-                                <img src="/uploads/{{ experience.icone }}" id="experiencePhoto" class="w3-circle" alt="Photo of Me">
+                                <img src="/uploads/{{ experience.icone }}" id="experiencePhoto" class="w3-circle"
+                                     alt="Photo of Me">
                             </div>
                             <h4>{{ experience.title }}</h4>
                             <h6>{{ experience.dated }}</h6>
                             {% if app.user %}
                                 {% include 'partProfessionalExperience/_modalEditExperience.html.twig' %}
-                                <a href="{{ path('deleteExperience', {id : experience.id }) }}"  onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ experience.title }} ?')"><i class="fas fa-trash-alt" style="display: inline" ></i></a>
+                                <a href="{{ path('deleteExperience', {id : experience.id }) }}"
+                                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ experience.title }} ?')"><i
+                                            class="fas fa-trash-alt" style="display: inline"></i></a>
                             {% endif %}
                         </div>
                     {% endfor %}
@@ -153,7 +171,8 @@
             <div class="container">
                 <ul class="soc-media-ul">
                     <li>
-                        <a href="https://www.linkedin.com/in/camilo-bola%C3%B1os-4034a5171/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.linkedin.com/in/camilo-bola%C3%B1os-4034a5171/" target="_blank"><i
+                                    class="fab fa-linkedin-in"></i></a>
                     </li>
 
                     <li>
