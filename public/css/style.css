@@ -125,7 +125,7 @@ hr {
 .sec-main {
     position: relative;
     height: 560px;
-    background: url(https://source.unsplash.com/kVf7VRgg4p8/1920x1080) no-repeat center center;
+    background: url(https://i.udemycdn.com/course/750x422/805992_d306_8.jpg) no-repeat center center;
     background-size: cover;
 }
 .sec-main:after {
@@ -403,6 +403,9 @@ p {
     font-size:18px;
 }
 
+.Degrade {
+    background-image:linear-gradient(white, #EAEAEA);
+}
 
 
 
